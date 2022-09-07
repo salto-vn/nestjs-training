@@ -5,20 +5,20 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import {UserLogin} from './entities/login.entity';
 import {LoginUserInput} from './dto/login-user.input';
-import {UseGuards} from '@nestjs/common';
+import {Body, UseGuards} from '@nestjs/common';
 
 @Resolver(() => User)
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
   @Mutation(() => User)
-  createUser(@Args() args: CreateUserInput) {
+  createUser(@Body() @Args() args: CreateUserInput) {
     return this.usersService.create(args);
   }
 
   @UseGuards()
   @Mutation(() => UserLogin)
-  loginUser(@Args() args: LoginUserInput) {
+  loginUser(@Body() @Args() args: LoginUserInput) {
     return this.usersService.login(args);
   }
 
@@ -38,7 +38,7 @@ export class UsersResolver {
   }
 
   @Mutation(() => User)
-  updateUser(@Args('id', { type: () => Int }) id: number ,@Args() args: UpdateUserInput) {
+  updateUser(@Body() @Args('id', { type: () => Int }) id: number ,@Args() args: UpdateUserInput) {
     return this.usersService.update(id, args);
   }
 
