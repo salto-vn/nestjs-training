@@ -1,0 +1,92 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  """User id"""
+  id: Int!
+
+  """User email"""
+  email: String!
+
+  """User name"""
+  name: String!
+
+  """User posts"""
+  posts: [Post!]
+}
+
+type Post {
+  """Post id"""
+  id: Int!
+
+  """Post title"""
+  title: String!
+
+  """Post content"""
+  content: String
+
+  """Post published"""
+  published: Boolean
+
+  """Post author"""
+  author: User!
+
+  """Post author id"""
+  authorId: Int!
+}
+
+type UserLogin {
+  """Access token"""
+  accessToken: String!
+}
+
+type Query {
+  posts: [Post!]!
+  post(id: Int!): Post!
+  getUserList: [User!]!
+  getUserDetail(id: Int!): User!
+  getUserPosts(id: Int!): User!
+}
+
+type Mutation {
+  createPost(
+    """Title"""
+    title: String!
+
+    """Content"""
+    content: String!
+
+    """Published"""
+    published: Boolean = false
+
+    """Author Id"""
+    authorId: Int!
+  ): Post!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  removePost(id: Int!): Post!
+  createUser(
+    """User email"""
+    email: String!
+
+    """User name"""
+    name: String!
+
+    """User password"""
+    password: String!
+  ): User!
+  loginUser(email: String!, password: String!): UserLogin!
+  updateUser(
+    id: Int!
+
+    """User email"""
+    email: String
+    name: String
+    password: String
+  ): User!
+  removeUser(id: Int!): User!
+}
+
+input UpdatePostInput {
+  id: Int!
+}

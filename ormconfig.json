@@ -1,0 +1,15 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "1111",
+  "database": "DB_TEST",
+  "entities": ["dist/**/*.entity{ .ts,.js}"],
+  "synchronize": true,
+
+  "migrations": ["dist/migrations/*{.ts,.js}"],
+  "migrationsTableName": "migrations_history",
+  "migrationsRun": true,
+  "ssl": false
+}
