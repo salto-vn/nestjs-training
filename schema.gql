@@ -74,6 +74,12 @@ type Mutation {
 
     """User password"""
     password: String!
+
+    """User phone"""
+    phone: String!
+
+    """User relation ship"""
+    inRelationship: String!
   ): User!
   loginUser(email: String!, password: String!): UserLogin!
   updateUser(
@@ -83,6 +89,12 @@ type Mutation {
     email: String
     name: String
     password: String
+
+    """User phone"""
+    phone: String!
+
+    """User relation ship"""
+    inRelationship: String
   ): User!
   removeUser(id: Int!): User!
 }

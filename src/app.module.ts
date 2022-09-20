@@ -6,6 +6,7 @@ import {PostsModule} from './modules';
 import {ConfigModule} from '@nestjs/config';
 import configuration from './config/configuration';
 import {UsersModule} from './modules/users/users.module';
+import {UploadModule} from './modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -18,6 +19,8 @@ import {UsersModule} from './modules/users/users.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
+      debug: false,
+      context: ({ req }) => ({ req })
     }),
 
     // cronjob
@@ -26,6 +29,9 @@ import {UsersModule} from './modules/users/users.module';
     // features
     PostsModule,
     UsersModule,
+    UploadModule
+  ],
+  providers: [
   ],
 })
-export class AppModule { }
+export class AppModule {}

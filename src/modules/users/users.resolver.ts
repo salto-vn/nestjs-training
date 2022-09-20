@@ -6,6 +6,8 @@ import { UpdateUserInput } from './dto/update-user.input';
 import {UserLogin} from './entities/login.entity';
 import {LoginUserInput} from './dto/login-user.input';
 import {Body, UseGuards} from '@nestjs/common';
+import {GqlAuthGuard} from 'src/guards/gql-auth.guard';
+import {RolesGuard} from 'src/guards/role.guard';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -16,7 +18,6 @@ export class UsersResolver {
     return this.usersService.create(args);
   }
 
-  @UseGuards()
   @Mutation(() => UserLogin)
   loginUser(@Body() @Args() args: LoginUserInput) {
     return this.usersService.login(args);
@@ -32,6 +33,7 @@ export class UsersResolver {
     return this.usersService.findOne(id);
   }
 
+  @UseGuards(GqlAuthGuard,RolesGuard)
   @Query(() => User, { name: 'getUserPosts' })
   findUserPosts(@Args('id', { type: () => Int }) id: number) {
     return this.usersService.findUserWithPost(id);
